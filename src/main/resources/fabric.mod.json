@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "sixdoftest",
+  "version": "${version}",
+
+  "name": "6DOF Test",
+  "description": "6DOF Test",
+  "authors": [ "GDavid" ],
+  "contact": {
+    "sources": "https://github.com/gdavid04/6DOFTest"
+  },
+
+  "license": "GNU LGPLv3",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+		"gdavid.sixdoftest.Mod"
+	],
+    "client": [
+        "gdavid.sixdoftest.ClientMod"
+    ]
+  },
+  "mixins": [ "sixdoftest.mixins.json" ],
+  "accessWidener": "sixdoftest.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=0.15.6",
+    "fabric-api": "*",
+    "minecraft": "~1.20.1",
+    "java": ">=17"
+  }
+}
