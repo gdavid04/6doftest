@@ -2,7 +2,6 @@ package gdavid.sixdoftest.mixin;
 
 import gdavid.sixdoftest.SpaceManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,11 +35,5 @@ public abstract class EntityMixin {
 		if (!SpaceManager.isIn6dof(self())) return;
 		callback.setReturnValue(false);
 	}
-	
-	@Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
-	private void noFallDamageIn6DOFSpace(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> callback) {
-		if (!SpaceManager.isIn6dof(self())) return;
-		callback.setReturnValue(false);
-	}
-	
+
 }
