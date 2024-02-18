@@ -16,9 +16,9 @@ public class ClientMod implements ClientModInitializer {
 	public void onInitializeClient() {
 		KeyBindingHelper.registerKeyBinding(keyRollLeft);
 		KeyBindingHelper.registerKeyBinding(keyRollRight);
-		WorldRenderEvents.AFTER_SETUP.register((ctx) -> {
+		WorldRenderEvents.START.register((ctx) -> {
 			Entity focus = ctx.camera().getFocusedEntity();
-			IRoll.rollTransform(ctx.matrixStack(), focus);
+			IRoll.rollTransform(ctx.matrixStack(), focus, true);
 		});
 	}
 	

@@ -11,8 +11,7 @@
 
 ## 6DOF
 - [x] camera
-  - [ ] fix skybox not using the correct transform for some reason
-  - [ ] fix culling transform
+  - [ ] fix glitch when looking upside down (gimbal lock?)
 - [x] model pose
 - [ ] look around
 - [x] controls for roll
