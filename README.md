@@ -15,7 +15,7 @@
   - [ ] fix culling transform
 - [x] model pose
 - [ ] look around
-- [ ] controls for roll
+- [x] controls for roll
 - [ ] camera relative movement (hook Entity.movementInputToVelocity)
 - [ ] sync orientation
 - [x] animate transition back to upright (roll)

@@ -21,6 +21,12 @@ public interface IRoll {
     void setRollf(float roll);
 
     /**
+     * Add to the roll in degrees.
+     * For handling per frame changes, bypasses tick interpolation locally.
+     */
+    void addRollf(float roll);
+
+    /**
      * Get the interpolated roll.
      */
     float getRollf(float partialTicks);

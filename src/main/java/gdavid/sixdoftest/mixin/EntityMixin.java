@@ -1,6 +1,12 @@
 package gdavid.sixdoftest.mixin;
 
+import gdavid.sixdoftest.ClientMod;
+import gdavid.sixdoftest.IRoll;
 import gdavid.sixdoftest.SpaceManager;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.util.GlfwUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.data.TrackedData;
 import org.spongepowered.asm.mixin.Final;
@@ -47,6 +53,26 @@ public abstract class EntityMixin {
 	private void noCrawlIn6DOFSpace(CallbackInfoReturnable<Boolean> callback) {
 		if (!SpaceManager.isIn6dof(self())) return;
 		callback.setReturnValue(false);
+	}
+
+	@Unique
+	private static double lastRollUpdateTime = 0;
+
+	// TODO: sensitivity setting for roll
+	@Unique
+	private static final float rollSpeed = 90.0f;
+
+	@Environment(EnvType.CLIENT)
+	@Inject(method = "changeLookDirection", at = @At("HEAD"))
+	private void rollLook(CallbackInfo callback) {
+		if (!SpaceManager.isIn6dof(self())) return;
+		if (!(self() instanceof ClientPlayerEntity)) return;
+		IRoll roll = (IRoll) self();
+		double time = GlfwUtil.getTime();
+		double deltaTime = time - lastRollUpdateTime;
+		float delta = (ClientMod.keyRollRight.isPressed() ? 1 : 0) - (ClientMod.keyRollLeft.isPressed() ? 1 : 0);
+		roll.setRollf(roll.getRollf() + delta * rollSpeed * (float) deltaTime);
+		lastRollUpdateTime = time;
 	}
 
 }
