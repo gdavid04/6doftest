@@ -10,8 +10,7 @@ public class ClientMod implements ClientModInitializer {
 	public void onInitializeClient() {
 		WorldRenderEvents.AFTER_SETUP.register((ctx) -> {
 			Entity focus = ctx.camera().getFocusedEntity();
-			if (focus == null) return;
-			RollManager.rollTransform(ctx.matrixStack(), focus);
+			IRoll.rollTransform(ctx.matrixStack(), focus);
 		});
 	}
 	

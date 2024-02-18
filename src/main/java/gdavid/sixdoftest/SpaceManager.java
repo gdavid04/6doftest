@@ -5,7 +5,8 @@ import net.minecraft.entity.Entity;
 public class SpaceManager {
 	
 	public static boolean isIn6dof(Entity entity) {
-		return true;
+		// TODO: for testing
+		return entity.getX() < 0;
 	}
 	
 }

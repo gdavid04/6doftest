@@ -11,9 +11,11 @@
 
 ## 6DOF
 -[x] camera
+  -[ ] fix skybox not using the correct transform for some reason
+  -[ ] fix culling transform
 -[x] model pose
 -[ ] look around
 -[ ] controls for roll
 -[ ] camera relative movement (hook Entity.movementInputToVelocity)
 -[ ] sync orientation
--[ ] animate transition back to upright (roll)
+-[x] animate transition back to upright (roll)

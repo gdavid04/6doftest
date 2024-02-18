@@ -1,6 +1,6 @@
 package gdavid.sixdoftest.mixin;
 
-import gdavid.sixdoftest.RollManager;
+import gdavid.sixdoftest.IRoll;
 import gdavid.sixdoftest.SpaceManager;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -23,7 +23,7 @@ public class PlayerEntityRendererMixin {
 	@Inject(method = "setupTransforms(Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V", at = @At("TAIL"))
 	private void setup6DOFTranform(AbstractClientPlayerEntity player, MatrixStack matrixStack, float f, float g, float h, CallbackInfo callback) {
 		if (!SpaceManager.isIn6dof(player)) return;
-		RollManager.rollTransform(matrixStack, player);
+		IRoll.rollTransform(matrixStack, player);
 	}
 
 }
