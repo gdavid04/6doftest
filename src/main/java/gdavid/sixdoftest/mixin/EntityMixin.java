@@ -44,7 +44,7 @@ public abstract class EntityMixin {
 
 	@Redirect(method = "writeNbt", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;hasNoGravity()Z"))
 	private boolean noSaveGravityIn6DOFSpace(Entity instance) {
-		// TODO: do the same hack for Buckeable.copyDataToStack, we don't want people bringing back floating fish from space
+		// TODO: do the same hack for Bucketable.copyDataToStack, we don't want people bringing back floating fish from space
 		if (SpaceManager.isIn6dof(instance)) return self().getDataTracker().get(NO_GRAVITY);
 		return instance.hasNoGravity();
 	}
