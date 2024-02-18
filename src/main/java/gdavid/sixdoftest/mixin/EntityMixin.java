@@ -71,7 +71,7 @@ public abstract class EntityMixin {
 		double time = GlfwUtil.getTime();
 		double deltaTime = time - lastRollUpdateTime;
 		float delta = (ClientMod.keyRollRight.isPressed() ? 1 : 0) - (ClientMod.keyRollLeft.isPressed() ? 1 : 0);
-		roll.setRollf(roll.getRollf() + delta * rollSpeed * (float) deltaTime);
+		roll.addRollf(delta * rollSpeed * (float) deltaTime);
 		lastRollUpdateTime = time;
 	}
 
