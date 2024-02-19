@@ -5,7 +5,7 @@ A WIP space mod for Fabric 1.20.1 with 6DOF movement.
 - [x] no gravity
 - [x] swim movement
   - [x] no swim up/down based on pitch
-  - [ ] swim up/down based on jump/sneak
+  - [x] swim up/down based on jump/sneak
 - [ ] correct on ground to use all surface orientations
 - [ ] disable jumping or make it work in all directions
 - [x] no fall damage

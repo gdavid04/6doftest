@@ -86,6 +86,7 @@ public abstract class EntityMixin {
 		if (sqMag < 1e-7) return;
 		// Perform voodoo magic on coordinates
 		Vec3d vel = (sqMag > 1 ? movementInput.normalize() : movementInput).multiply(speed)
+				.multiply(1, -1, 1) // Oof
 				.rotateZ((float) Math.toRadians(roll.getRollf()))
 				.rotateX((float) Math.toRadians(self().getPitch()))
 				.rotateY(-(float) Math.toRadians(self().getYaw()))
