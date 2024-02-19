@@ -22,12 +22,12 @@ A WIP space mod for Fabric 1.20.1 with 6DOF movement.
 
 ## 6DOF
 - [x] camera
-  - [ ] fix glitch when looking upside down (gimbal lock?)
   - [ ] fix frustum culling
   - [ ] fix debug cursor orientation
 - [x] model pose
 - [x] look around
-  - [ ] fix first person model acting weird on some rotations
+  - [x] fix first person model acting weird on some rotations
+  - [ ] fix third person front view rotation controls
 - [x] controls for roll
 - [ ] camera relative movement (hook Entity.movementInputToVelocity)
 - [ ] sync orientation

@@ -24,7 +24,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IRoll {
     
     @Shadow public abstract PlayerAbilities getAbilities();
     
-    private PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
     }
     
@@ -48,25 +48,14 @@ public abstract class PlayerEntityMixin extends LivingEntity implements IRoll {
                 .rotateZ(Math.toRadians(dr))
                 .rotateX(Math.toRadians(dy))
                 .rotateY(Math.toRadians(dx));
-        Vector3d cur = rotate(new Vector3d(getPitch(), getYaw(), roll), rot);
-        Vector3d prev = rotate(new Vector3d(prevPitch, prevYaw, prevRoll), rot);
+        Vector3d cur = IRoll.rotate(getPitch(), getYaw(), roll, rot);
+        Vector3d prev = IRoll.rotate(prevPitch, prevYaw, prevRoll, rot);
         setPitch((float) cur.x);
         setYaw((float) cur.y);
         roll = (float) cur.z;
         prevPitch = (float) prev.x;
         prevYaw = (float) prev.y;
         prevRoll = (float) prev.z;
-    }
-    
-    @Unique
-    private Vector3d rotate(Vector3d base, Quaterniond rot) {
-        return new Quaterniond()
-            .rotateZ(Math.toRadians(base.z))
-            .rotateX(Math.toRadians(base.x))
-            .rotateY(Math.toRadians(base.y))
-            .premul(rot)
-            .getEulerAnglesZXY(new Vector3d())
-            .mul(180 / Math.PI);
     }
     
     @Override

@@ -6,7 +6,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.RotationAxis;
+import org.joml.Quaterniond;
 import org.joml.Quaternionf;
+import org.joml.Vector3d;
 
 public interface IRoll {
 
@@ -22,6 +24,16 @@ public interface IRoll {
      * Get the interpolated roll.
      */
     float getRollf(float partialTicks);
+    
+    static Vector3d rotate(double pitch, double yaw, double roll, Quaterniond rot) {
+        return new Quaterniond()
+                .rotateZ(Math.toRadians(roll))
+                .rotateX(Math.toRadians(pitch))
+                .rotateY(Math.toRadians(yaw))
+                .premul(rot)
+                .getEulerAnglesZXY(new Vector3d())
+                .mul(180 / Math.PI);
+    }
 
     @Environment(EnvType.CLIENT)
     static void rollTransform(MatrixStack ms, Entity entity, boolean invert) {
