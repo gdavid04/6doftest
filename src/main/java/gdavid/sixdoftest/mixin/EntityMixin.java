@@ -9,6 +9,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.GlfwUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.data.TrackedData;
+import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -75,6 +76,21 @@ public abstract class EntityMixin {
 		lastRollUpdateTime = time;
 		if (self().getVehicle() != null) self().getVehicle().onPassengerLookAround(self()); // Stay consistent with vanilla behavior
 		callback.cancel(); // We already handled mouse look
+	}
+	
+	@Inject(method = "updateVelocity", at = @At("HEAD"), cancellable = true)
+	private void movementIn6DOFSpace(float speed, Vec3d movementInput, CallbackInfo callback) {
+		if (!SpaceManager.isIn6dof(self()) || !(self() instanceof IRoll roll)) return;
+		callback.cancel();
+		double sqMag = movementInput.lengthSquared();
+		if (sqMag < 1e-7) return;
+		// Perform voodoo magic on coordinates
+		Vec3d vel = (sqMag > 1 ? movementInput.normalize() : movementInput).multiply(speed)
+				.rotateZ((float) Math.toRadians(roll.getRollf()))
+				.rotateX((float) Math.toRadians(self().getPitch()))
+				.rotateY(-(float) Math.toRadians(self().getYaw()))
+				.multiply(1, -1, 1); // Up is down
+		self().setVelocity(self().getVelocity().add(vel));
 	}
 
 }

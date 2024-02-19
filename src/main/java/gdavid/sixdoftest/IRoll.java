@@ -16,6 +16,8 @@ public interface IRoll {
      */
     void rotate(float dr, float dx, float dy);
 
+    float getRollf();
+    
     /**
      * Get the interpolated roll.
      */

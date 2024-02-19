@@ -4,8 +4,10 @@ A WIP space mod for Fabric 1.20.1 with 6DOF movement.
 ## Zero gravity space
 - [x] no gravity
 - [x] swim movement
-  - [ ] no swim up/down based on pitch
+  - [x] no swim up/down based on pitch
+  - [ ] swim up/down based on jump/sneak
 - [ ] correct on ground to use all surface orientations
+- [ ] disable jumping or make it work in all directions
 - [x] no fall damage
 - [ ] bump into wall damage regardless of direction
 - [ ] make mob AI less helpless
@@ -22,6 +24,7 @@ A WIP space mod for Fabric 1.20.1 with 6DOF movement.
 - [x] camera
   - [ ] fix glitch when looking upside down (gimbal lock?)
   - [ ] fix frustum culling
+  - [ ] fix debug cursor orientation
 - [x] model pose
 - [x] look around
   - [ ] fix first person model acting weird on some rotations
