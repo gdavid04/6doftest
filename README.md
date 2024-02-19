@@ -27,12 +27,12 @@ A WIP space mod for Fabric 1.20.1 with 6DOF movement.
 - [x] look around
   - [ ] fix third person front view rotation controls
 - [x] controls for roll
-- [ ] camera relative movement (hook Entity.movementInputToVelocity)
+- [x] camera relative movement
 - [ ] sync orientation
 - [x] animate transition back to upright (roll)
 
 ## Air
-- [ ] make breath meter deplete in space
+- [x] make breath meter deplete in space
 - [ ] oxygen tanks
 - [ ] pressurization system
   - [ ] airlocks
