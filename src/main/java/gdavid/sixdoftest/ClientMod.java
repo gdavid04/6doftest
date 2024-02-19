@@ -2,9 +2,7 @@ package gdavid.sixdoftest;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.entity.Entity;
 import org.lwjgl.glfw.GLFW;
 
 public class ClientMod implements ClientModInitializer {
@@ -16,10 +14,6 @@ public class ClientMod implements ClientModInitializer {
 	public void onInitializeClient() {
 		KeyBindingHelper.registerKeyBinding(keyRollLeft);
 		KeyBindingHelper.registerKeyBinding(keyRollRight);
-		WorldRenderEvents.START.register((ctx) -> {
-			Entity focus = ctx.camera().getFocusedEntity();
-			IRoll.rollTransform(ctx.matrixStack(), focus, true);
-		});
 	}
 	
 }
