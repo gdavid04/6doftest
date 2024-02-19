@@ -11,20 +11,10 @@ import org.joml.Quaternionf;
 public interface IRoll {
 
     /**
-     * Get the roll in degrees.
-     */
-    float getRollf();
-
-    /**
-     * Set the roll in degrees.
-     */
-    void setRollf(float roll);
-
-    /**
-     * Add to the roll in degrees.
+     * Apply rotation.
      * For handling per frame changes, bypasses tick interpolation locally.
      */
-    void addRollf(float roll);
+    void rotate(float dr, float dx, float dy);
 
     /**
      * Get the interpolated roll.

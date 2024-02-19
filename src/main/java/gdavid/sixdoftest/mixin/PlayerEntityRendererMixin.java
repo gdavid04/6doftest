@@ -20,9 +20,9 @@ public class PlayerEntityRendererMixin {
 		return SpaceManager.isIn6dof(instance) || instance.isTouchingWater();
 	}
 
+	// TODO: Move this to a LivingEntityRenderer mixin and add support for all implementing IRoll?
 	@Inject(method = "setupTransforms(Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V", at = @At("TAIL"))
-	private void setup6DOFTranform(AbstractClientPlayerEntity player, MatrixStack matrixStack, float f, float g, float h, CallbackInfo callback) {
-		if (!SpaceManager.isIn6dof(player)) return;
+	private void setupRollTranform(AbstractClientPlayerEntity player, MatrixStack matrixStack, float f, float g, float h, CallbackInfo callback) {
 		IRoll.rollTransform(matrixStack, player, false);
 	}
 

@@ -63,16 +63,18 @@ public abstract class EntityMixin {
 	private static final float rollSpeed = 90.0f;
 
 	@Environment(EnvType.CLIENT)
-	@Inject(method = "changeLookDirection", at = @At("HEAD"))
-	private void rollLook(CallbackInfo callback) {
+	@Inject(method = "changeLookDirection", at = @At("HEAD"), cancellable = true)
+	private void rollLook(double dx, double dy, CallbackInfo callback) {
 		if (!SpaceManager.isIn6dof(self())) return;
 		if (!(self() instanceof ClientPlayerEntity)) return;
 		IRoll roll = (IRoll) self();
 		double time = GlfwUtil.getTime();
 		double deltaTime = time - lastRollUpdateTime;
-		float delta = (ClientMod.keyRollRight.isPressed() ? 1 : 0) - (ClientMod.keyRollLeft.isPressed() ? 1 : 0);
-		roll.addRollf(delta * rollSpeed * (float) deltaTime);
+		float dr = (ClientMod.keyRollRight.isPressed() ? 1 : 0) - (ClientMod.keyRollLeft.isPressed() ? 1 : 0);
+		roll.rotate(dr * rollSpeed * (float) deltaTime, (float) dx * 0.15f, (float) dy * 0.15f);
 		lastRollUpdateTime = time;
+		if (self().getVehicle() != null) self().getVehicle().onPassengerLookAround(self()); // Stay consistent with vanilla behavior
+		callback.cancel(); // We already handled mouse look
 	}
 
 }

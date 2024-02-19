@@ -4,11 +4,14 @@ import gdavid.sixdoftest.IRoll;
 import gdavid.sixdoftest.SpaceManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
+import org.joml.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.lang.Math;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin implements IRoll {
@@ -28,19 +31,30 @@ public class PlayerEntityMixin implements IRoll {
     private float prevRoll;
 
     @Override
-    public float getRollf() {
-        return roll;
+    public void rotate(float dr, float dx, float dy) {
+        Quaterniond rot = new Quaterniond()
+                .rotateZ(Math.toRadians(dr))
+                .rotateX(Math.toRadians(dy))
+                .rotateY(Math.toRadians(dx));
+        Vector3d cur = rotate(new Vector3d(self().getPitch(), self().getYaw(), roll), rot);
+        Vector3d prev = rotate(new Vector3d(self().prevPitch, self().prevYaw, prevRoll), rot);
+        self().setPitch((float) cur.x);
+        self().setYaw((float) cur.y);
+        roll = (float) cur.z;
+        self().prevPitch = (float) prev.x;
+        self().prevYaw = (float) prev.y;
+        prevRoll = (float) prev.z;
     }
-
-    @Override
-    public void setRollf(float roll) {
-        this.roll = MathHelper.wrapDegrees(roll);
-    }
-
-    @Override
-    public void addRollf(float roll) {
-        setRollf(getRollf() + roll);
-        prevRoll = MathHelper.wrapDegrees(prevRoll + roll);
+    
+    @Unique
+    private Vector3d rotate(Vector3d base, Quaterniond rot) {
+        return new Quaterniond()
+            .rotateZ(Math.toRadians(base.z))
+            .rotateX(Math.toRadians(base.x))
+            .rotateY(Math.toRadians(base.y))
+            .premul(rot)
+            .getEulerAnglesZXY(new Vector3d())
+            .mul(180 / Math.PI);
     }
 
     @Override
