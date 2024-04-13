@@ -64,6 +64,19 @@ A WIP space mod for Fabric 1.20.1 with 6DOF movement.
 - [ ] gravity generator
 - [ ] some sort of power source for gravity manipulating equipment
 
+## Spaceships
+- [ ] probably using Valkyrien Skies API
+- [ ] 6DOF movement
+- [ ] blocks
+  - [ ] pilot seat
+  - [ ] thruster
+  - [ ] fuel tank
+  - [ ] jump drive
+- [ ] a way to transition between space dimensions
+- [ ] integrate with some computer mod for autopilot
+- [ ] pressurization
+- [ ] HOTAS support for pilot controls
+
 ## World
 - [ ] space station dimension
   - [ ] zero gravity
